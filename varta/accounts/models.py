@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.password_validation import validate_password
 
+from varta.utils import upload_path
+
 class UserManager(BaseUserManager):
     def create_user(self, username, password=None):
         if not username:
@@ -22,6 +24,7 @@ class UserManager(BaseUserManager):
     
 class User(AbstractBaseUser):
     username = models.CharField(unique=True, max_length=32)
+    photo = models.ImageField(upload_to=upload_path, null=True, blank=True)
     is_active = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)

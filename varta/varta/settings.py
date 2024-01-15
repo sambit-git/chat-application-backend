@@ -85,8 +85,18 @@ DATABASES = {
     }
 }
 
-# custom auth user model
+# by sam: custom auth user model
 AUTH_USER_MODEL = "accounts.User"
+
+# by sam: default permission and authentication classes
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ]
+}
 
 
 # Password validation
@@ -124,6 +134,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
+# by sam: static files and media files
+STATICFILES_DIRS = [ BASE_DIR / 'static' ]
+STATIC_ROOT = BASE_DIR.parent / 'cdn' / 'static'
+
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR.parent / 'cdn' / 'media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
